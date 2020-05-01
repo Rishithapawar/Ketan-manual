@@ -2,15 +2,15 @@
 \numberwithin{equation}{enumi}
 
 \item
-For a unity feedback system shown in  Fig.  \ref{fig:ee18btech11033_block}, having transfer function given below in eq \ref{eq:ee18btech11033_tf}.  Design the value of gain K for $\brak{i}$ a gain margin of 33 dB. $\brak{ii}$ Phase margin of 40\degree. $\brak{iii}$ to yield maximum peak overshoot of 20 percent for a step input.
+For a unity feedback system shown in  Fig.    \ref{fig:flow}, having transfer function given below in  eq \ref{eq:ee18btech11033_tf}.  Design the value of gain K for $\brak{i}$ a gain margin of 33 dB. $\brak{ii}$ Phase margin of 40\degree. $\brak{iii}$ to yield maximum peak overshoot of 20 percent for a step input.
 
 \begin{figure}[!ht]
 	\begin{center}
 		
-		\resizebox{\columnwidth}{!}{\input{./figs/ee18btech11033.tex}}
+		\resizebox{\columnwidth}{!}{\input{./figs/ee18btech11033/ee18btech11033.tex}}
 	\end{center}
 \caption{}
-\label{fig:ee18btech11033_block}
+\label{fig:flow}
 \end{figure}
 
 \begin{align}
@@ -50,12 +50,12 @@ Phase of the given transfer function is:
 \solution The following code generates Bode plot of $B\brak{s}$ as shown in Fig \ref{fig:ee18btech11033_1}
 
 \begin{lstlisting}
-codes/ee18btech11033_1.py
+codes/ee18btech11033/ee18btech11033_1.py
 \end{lstlisting}
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\columnwidth]{./figs/ee18btech11033_1.eps}
+\includegraphics[width=\columnwidth]{./figs/ee18btech11033/ee18btech11033_1.eps}
 \caption{Bode Plot of $B\brak{s}$}
 \label{fig:ee18btech11033_1}
 \end{figure}
@@ -66,12 +66,12 @@ From the graph we can tell it should be shifted by a length $20log(K)$ which res
 \solution The following code generates Fig \ref{fig:ee18btech11033_ver1}.
 
 \begin{lstlisting}
-codes/ee18btech11033_ver1.py
+codes/ee18btech11033/ee18btech11033_ver1.py
 \end{lstlisting}
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\columnwidth]{./figs/ee18btech11033_ver1.eps}
+\includegraphics[width=\columnwidth]{./figs/ee18btech11033/ee18btech11033_ver1.eps}
 \caption{Bode Plot of $G\brak{s}$ with $K=116.01$ }
 \label{fig:ee18btech11033_ver1}
 \end{figure}
@@ -87,28 +87,28 @@ codes/ee18btech11033_ver1.py
 The following code generates Bode plot of $B\brak{s}$ to obtain $\omega_{gc}$ as shown in Fig \ref{fig:ee18btech11033_2}
 
 \begin{lstlisting}
-codes/ee18btech11033_2.py
+codes/ee18btech11033/ee18btech11033_2.py
 \end{lstlisting}
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\columnwidth]{./figs/ee18btech11033_2.eps}
+\includegraphics[width=\columnwidth]{./figs/ee18btech11033/ee18btech11033_2.eps}
 \caption{Bode Plot of $B\brak{s}$}
 \label{fig:ee18btech11033_2}
 \end{figure}
-Fig \ref{fig:ee18btech11033_2} shows how much the gain graph be slided to get 0 dB gain at $\omega_{gc}$.
+Fig \ref{fig:ee18btech11033_2} shows how much the gain graph be shifted to get 0 dB gain at $\omega_{gc}$.
 From the graph we can tell it should be shifted by a length $20log(k)$ which results in  $K =1710.01$ 
 \item Verify by substituting value of K obtained above. 
 \\
 \solution The following code generates Fig \ref{fig:ee18btech11033_ver2}.
 
 \begin{lstlisting}
-codes/ee18btech11033_ver2.py
+codes/ee18btech11033/ee18btech11033_ver2.py
 \end{lstlisting}
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\columnwidth]{./figs/ee18btech11033_ver2.eps}
+\includegraphics[width=\columnwidth]{./figs/ee18btech11033/ee18btech11033_ver2.eps}
 \caption{Bode Plot of $G\brak{s}$ with $K= 1710.01$}
 \label{fig:ee18btech11033_ver2}
 \end{figure}
@@ -128,10 +128,34 @@ Step response-
 By final value theorem, steady state value-
 
 \begin{align}
-    \lim_{s \to 0} sY\brak{s} = \lim_{t \to \infty} y\brak{t} = \frac{k}{405}
+    \lim_{s \to 0} sY\brak{s} = \lim_{t \to \infty} y\brak{t} = \frac{k}{405+k}
 \end{align}
-So the value at peak should be $\frac{6k}{2025}$.
+So the value at peak should be $\frac{6k}{2025+5k}$.
 Now it is extremely difficult to find K  from the given data.
-Since it a Third order system, there exist no explicit formula for peak time. Thus, trying a random value of K under the bound the satisfies routh hurwitz, then taking inverse Laplace and differentiating to get peak time and thus overshoot, is the only method that remains.
+Since it a Third order system, there exist no explicit formula for peak time. Thus, trying a random value of K under the bound that satisfies routh hurwitz,and verifying the peak overshoot, is the only method that remains.
+Routh hurwitz criteria tells us that $k<2389.5$. 
+The following code generates Step input response of $y\brak{t}$ to obtain $k$ as shown in Fig \ref{fig:ee18btech11033_3}
+
+\begin{lstlisting}
+codes/ee18btech11033/ee18btech11033_3.py
+\end{lstlisting}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\columnwidth]{./figs/ee18btech11033/ee18btech11033_3.eps}
+\caption{Step Input Response $y\brak{t}$}
+\label{fig:ee18btech11033_3}
+\end{figure}
+Fig \ref{fig:ee18btech11033_3} shows us that the peak value is 0.83 and the steady state value as 0.69 . We observe a 20 percent peak overshoot for $K=920$ .  
+
  
 \end{enumerate}
+
+
+
+
+
+
+
+
+
